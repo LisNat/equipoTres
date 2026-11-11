@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -43,4 +44,22 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    // Room (base de datos local)
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+
+    // Retrofit (API REST)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
+
+    // ViewModel y LiveData
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+
+    implementation(libs.androidx.fragment)
+
+    // Navigation
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 }
