@@ -62,4 +62,9 @@ dependencies {
     // Navigation
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
+    // Biometric
+    implementation(libs.biometric)
+    implementation(libs.lottie)
+    implementation(libs.coil)
 }
