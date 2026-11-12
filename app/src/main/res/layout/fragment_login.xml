@@ -9,12 +9,6 @@
         android:background="@color/dark_gray"
         tools:context=".view.fragment.LoginFragment">
 
-        <!-- Cabeza del perro: grande, arriba a la derecha y pegada al borde (HU 1.0 criterio 2) -->
-
-        <!-- Título "DogApp": grande, blanco, bold y centrado debajo de la imagen (HU 1.0 criterio 3) -->
-
-        <!-- Huella animada, abajo al centro (HU 1.0 criterio 4) -->
-
         <ImageView
             android:id="@+id/imgDogHead"
             android:layout_width="390dp"
