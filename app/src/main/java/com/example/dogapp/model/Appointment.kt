@@ -1,6 +1,11 @@
 package com.example.dogapp.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Appointment(
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val petName: String = "",
     val breed: String = "",
