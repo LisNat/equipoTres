@@ -49,6 +49,19 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
+    // Eliminar cita con callback para navegar después de completar el borrado
+    fun deleteAppointment(appointment: Appointment, onDeleted: () -> Unit) {
+        viewModelScope.launch {
+            _progresState.value = true
+            try {
+                appointmentRepository.deleteAppointment(appointment)
+                onDeleted()
+            } finally {
+                _progresState.value = false
+            }
+        }
+    }
+
     /**
      * Actualiza los datos editables de una cita. Si la raza cambió, se consulta
      * una nueva imagen en la Dog API; si la consulta falla se conserva la anterior.

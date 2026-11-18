@@ -2,6 +2,7 @@ package com.example.dogapp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class Appointment(
@@ -13,4 +14,4 @@ data class Appointment(
     val phone: String = "",
     val symptom: String = "",
     val imageUrl: String? = null
-)
+) : Serializable
