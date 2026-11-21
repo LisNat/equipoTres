@@ -76,7 +76,7 @@ class AppointmentDetailsFragment : Fragment() {
         // FAB Editar: navega a la pantalla de editar cita con los datos (HU-04 c5)
         binding.fbEdit.setOnClickListener {
             val bundle = Bundle()
-            bundle.putInt("appointmentId", receivedAppointment.id)
+            bundle.putSerializable("dataAppointment", receivedAppointment)
             findNavController().navigate(
                 R.id.action_appointmentDetailsFragment_to_editAppointmentFragment,
                 bundle
