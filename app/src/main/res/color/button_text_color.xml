@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Texto e icono del botón: blanco cuando está habilitado, tenue cuando está inactivo (HU-05 c6, c7) -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:state_enabled="false"
+        android:color="#99FFFFFF"/>
+
+    <item android:color="#FFFFFF"/>
+
+</selector>

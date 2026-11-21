@@ -14,7 +14,6 @@
     <string name="edit_appointment">Editar Cita</string>
     <string name="appointment_updated">Cita actualizada correctamente</string>
     <string name="appointment_update_error">Error al actualizar la cita</string>
-    <string name="appointment_not_found">No se encontró la cita</string>
     <string-array name="list_symptoms">
         <item>Síntomas</item>
         <item>Solo duerme</item>

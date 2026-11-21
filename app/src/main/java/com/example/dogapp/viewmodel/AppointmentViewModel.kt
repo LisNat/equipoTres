@@ -21,10 +21,6 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
 
     val listAppointment: LiveData<List<Appointment>> = appointmentRepository.getListAppointment()
 
-    fun getAppointmentById(id: Int): LiveData<Appointment?> {
-        return appointmentRepository.getAppointmentById(id)
-    }
-
     fun saveAppointment(appointment: Appointment, message: (String) -> Unit) {
         viewModelScope.launch {
             _progresState.value = true
@@ -49,54 +45,30 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    /**
-     * Actualiza los datos editables de una cita. Si la raza cambió, se consulta
-     * una nueva imagen en la Dog API; si la consulta falla se conserva la anterior.
-     */
-    fun editAppointment(
-        original: Appointment,
-        petName: String,
-        breed: String,
-        ownerName: String,
-        phone: String,
-        onResult: (Boolean) -> Unit
+    // Actualiza la cita en Room (HU-05 c8). Si la raza cambió se pide una imagen
+    // aleatoria de la nueva raza a la API Dog CEO; si falla se conserva la anterior.
+    fun updateAppointment(
+        appointment: Appointment,
+        previousBreed: String,
+        onUpdated: (Boolean) -> Unit
     ) {
         viewModelScope.launch {
             _progresState.value = true
             try {
-                val breedChanged = !original.breed.equals(breed, ignoreCase = true)
-                val imageUrl = if (breedChanged) {
-                    runCatching {
-                        dogRepository.getBreedImage(breed.lowercase(Locale.ROOT))
-                    }.getOrNull()
-                } else {
-                    original.imageUrl
+                var imageUrl = appointment.imageUrl
+                if (!appointment.breed.equals(previousBreed, ignoreCase = true)) {
+                    try {
+                        imageUrl = dogRepository.getBreedImage(appointment.breed.lowercase(Locale.ROOT))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
-                appointmentRepository.updateAppointment(
-                    original.copy(
-                        petName = petName,
-                        breed = breed,
-                        ownerName = ownerName,
-                        phone = phone,
-                        imageUrl = imageUrl
-                    )
-                )
-                onResult(true)
+                appointmentRepository.updateAppointment(appointment.copy(imageUrl = imageUrl))
+                _progresState.value = false
+                onUpdated(true)
             } catch (e: Exception) {
-                onResult(false)
-            } finally {
                 _progresState.value = false
-            }
-        }
-    }
-
-    fun updateAppointment(appointment: Appointment) {
-        viewModelScope.launch {
-            _progresState.value = true
-            try {
-                appointmentRepository.updateAppointment(appointment)
-            } finally {
-                _progresState.value = false
+                onUpdated(false)
             }
         }
     }

@@ -60,14 +60,11 @@
         android:name="com.example.dogapp.view.fragment.EditAppointmentFragment"
         android:label="Editar Cita"
         tools:layout="@layout/fragment_edit_appointment">
-        <argument
-            android:name="appointmentId"
-            app:argType="integer"
-            android:defaultValue="-1" />
         <action
             android:id="@+id/action_editAppointmentFragment_to_homeAppointmentFragment"
             app:destination="@id/homeAppointmentFragment"
-            app:popUpTo="@id/homeAppointmentFragment" />
+            app:popUpTo="@id/homeAppointmentFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>
