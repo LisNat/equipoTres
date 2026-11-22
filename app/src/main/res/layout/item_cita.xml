@@ -28,6 +28,8 @@
                 android:layout_height="60dp"
                 android:contentDescription="@string/pet_image"
                 android:scaleType="centerCrop"
+                android:background="@drawable/bg_image_circle"
+                android:clipToOutline="true"
                 android:src="@drawable/ic_dog_placeholder"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

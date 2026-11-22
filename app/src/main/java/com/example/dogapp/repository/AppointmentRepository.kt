@@ -11,14 +11,9 @@ import kotlinx.coroutines.withContext
 class AppointmentRepository(val context: Context) {
     private var appointmentDao: AppointmentDao = AppointmentDB.getDatabase(context).appointmentDao()
 
-    suspend fun saveAppointment(appointment: Appointment, messageResponse: (String) -> Unit) {
-        try {
-            withContext(Dispatchers.IO) {
-                appointmentDao.saveAppointment(appointment)
-            }
-            messageResponse("Cita guardada correctamente")
-        } catch (e: Exception) {
-            messageResponse("Error al guardar la cita: ${e.message}")
+    suspend fun saveAppointment(appointment: Appointment) {
+        withContext(Dispatchers.IO) {
+            appointmentDao.saveAppointment(appointment)
         }
     }
 

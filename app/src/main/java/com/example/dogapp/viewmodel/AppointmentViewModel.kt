@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.dogapp.model.Appointment
 import com.example.dogapp.repository.AppointmentRepository
 import com.example.dogapp.repository.DogRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -21,16 +22,28 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
 
     val listAppointment: LiveData<List<Appointment>> = appointmentRepository.getListAppointment()
 
-    fun saveAppointment(appointment: Appointment, message: (String) -> Unit) {
+    fun saveAppointment(appointment: Appointment, onSaved: (Result<Boolean>) -> Unit) {
         viewModelScope.launch {
             _progresState.value = true
-            try {
-                appointmentRepository.saveAppointment(appointment) { msg ->
-                    message(msg)
+            val result = try {
+                val imageUrl = try {
+                    dogRepository.getBreedImage(appointment.breed.lowercase(Locale.ROOT))
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    null
                 }
+
+                appointmentRepository.saveAppointment(appointment.copy(imageUrl = imageUrl))
+                Result.success(imageUrl != null)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Result.failure(e)
             } finally {
                 _progresState.value = false
             }
+            onSaved(result)
         }
     }
 

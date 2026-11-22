@@ -2,6 +2,7 @@ package com.example.dogapp.view.viewholder
 
 import androidx.navigation.NavController
 import android.os.Bundle
+import coil.load
 import com.example.dogapp.R
 import com.example.dogapp.databinding.ItemCitaBinding
 import com.example.dogapp.model.Appointment
@@ -18,6 +19,10 @@ class AppointmentViewHolder(
         binding.tvNombreMascota.text = appointment.petName
         binding.tvSintoma.text = appointment.symptom
         binding.tvTurno.text = "#${appointment.id}"
+        binding.ivMascota.load(appointment.imageUrl) {
+            placeholder(R.drawable.ic_dog_placeholder)
+            error(R.drawable.ic_dog_placeholder)
+        }
 
         // Al hacer clic en el CardView navega al detalle de la cita (HU-02 c5)
         binding.cvCita.setOnClickListener {

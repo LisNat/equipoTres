@@ -16,6 +16,8 @@
     <string name="edit_appointment">Editar Cita</string>
     <string name="appointment_updated">Cita actualizada correctamente</string>
     <string name="appointment_update_error">Error al actualizar la cita</string>
+    <string name="appointment_saved_without_image">Cita guardada, pero no se pudo cargar la imagen de la raza.</string>
+    <string name="appointment_save_error">No se pudo guardar la cita. Intenta de nuevo.</string>
     <string name="add_appointment">Agregar cita</string>
     <string name="delete_appointment">Eliminar cita</string>
     <string name="edit_appointment_action">Editar cita</string>
