@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.dogapp.R
 import com.example.dogapp.databinding.FragmentAddAppointmentBinding
 import com.example.dogapp.viewmodel.DogViewModel
 import java.util.Locale
@@ -39,6 +40,15 @@ class AddAppointmentFragment : Fragment() {
         binding.spinnerSymptoms.setSelection(0)
         setupBreedSuggestions()
         setupSaveButtonState()
+        binding.btnSaveAppointment.setOnClickListener {
+            if (binding.spinnerSymptoms.selectedItemPosition == 0) {
+                Toast.makeText(
+                    requireContext(),
+                    R.string.select_symptom_validation,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun setupBreedSuggestions() {
