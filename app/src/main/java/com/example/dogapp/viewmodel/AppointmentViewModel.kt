@@ -7,31 +7,43 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.dogapp.model.Appointment
 import com.example.dogapp.repository.AppointmentRepository
+import com.example.dogapp.repository.DogRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class AppointmentViewModel(application: Application) : AndroidViewModel(application) {
     val context = getApplication<Application>()
     private val appointmentRepository = AppointmentRepository(context)
+    private val dogRepository = DogRepository()
 
     private val _progresState = MutableLiveData(false)
     val progresState: LiveData<Boolean> = _progresState
 
     val listAppointment: LiveData<List<Appointment>> = appointmentRepository.getListAppointment()
 
-    fun getAppointmentById(id: Int): LiveData<Appointment?> {
-        return appointmentRepository.getAppointmentById(id)
-    }
-
-    fun saveAppointment(appointment: Appointment, message: (String) -> Unit) {
+    fun saveAppointment(appointment: Appointment, onSaved: (Result<Boolean>) -> Unit) {
         viewModelScope.launch {
             _progresState.value = true
-            try {
-                appointmentRepository.saveAppointment(appointment) { msg ->
-                    message(msg)
+            val result = try {
+                val imageUrl = try {
+                    dogRepository.getBreedImage(appointment.breed.lowercase(Locale.ROOT))
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    null
                 }
+
+                appointmentRepository.saveAppointment(appointment.copy(imageUrl = imageUrl))
+                Result.success(imageUrl != null)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Result.failure(e)
             } finally {
                 _progresState.value = false
             }
+            onSaved(result)
         }
     }
 
@@ -46,13 +58,43 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    fun updateAppointment(appointment: Appointment) {
+    // Eliminar cita con callback para navegar después de completar el borrado
+    fun deleteAppointment(appointment: Appointment, onDeleted: () -> Unit) {
         viewModelScope.launch {
             _progresState.value = true
             try {
-                appointmentRepository.updateAppointment(appointment)
+                appointmentRepository.deleteAppointment(appointment)
+                onDeleted()
             } finally {
                 _progresState.value = false
+            }
+        }
+    }
+
+    // Actualiza la cita en Room (HU-05 c8). Si la raza cambió se pide una imagen
+    // aleatoria de la nueva raza a la API Dog CEO; si falla se conserva la anterior.
+    fun updateAppointment(
+        appointment: Appointment,
+        previousBreed: String,
+        onUpdated: (Boolean) -> Unit
+    ) {
+        viewModelScope.launch {
+            _progresState.value = true
+            try {
+                var imageUrl = appointment.imageUrl
+                if (!appointment.breed.equals(previousBreed, ignoreCase = true)) {
+                    try {
+                        imageUrl = dogRepository.getBreedImage(appointment.breed.lowercase(Locale.ROOT))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+                appointmentRepository.updateAppointment(appointment.copy(imageUrl = imageUrl))
+                _progresState.value = false
+                onUpdated(true)
+            } catch (e: Exception) {
+                _progresState.value = false
+                onUpdated(false)
             }
         }
     }

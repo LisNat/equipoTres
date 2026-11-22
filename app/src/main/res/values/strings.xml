@@ -1,6 +1,37 @@
 <resources>
     <string name="dogApp">DogApp</string>
+    <string name="admin_citas">Administrador de Citas</string>
     <string name="biometric_title">Autenticación con Biometría</string>
     <string name="biometric_subtitle">Ingrese su huella digital</string>
     <string name="biometric_cancel">Cancelar</string>
+    <string name="new_appointment">Nueva Cita</string>
+    <string name="back">Volver</string>
+    <string name="breed">Raza</string>
+    <string name="pet_name">Nombre de la Mascota</string>
+    <string name="owner_name">Nombre del Propietario</string>
+    <string name="phone">Teléfono</string>
+    <string name="select_appointment">Seleccionar síntomas</string>
+    <string name="select_symptom_validation">Selecciona un síntoma</string>
+    <string name="save_appointment">Guardar Cita</string>
+    <string name="edit_appointment">Editar Cita</string>
+    <string name="appointment_updated">Cita actualizada correctamente</string>
+    <string name="appointment_update_error">Error al actualizar la cita</string>
+    <string name="appointment_saved_without_image">Cita guardada, pero no se pudo cargar la imagen de la raza.</string>
+    <string name="appointment_save_error">No se pudo guardar la cita. Intenta de nuevo.</string>
+    <string name="add_appointment">Agregar cita</string>
+    <string name="delete_appointment">Eliminar cita</string>
+    <string name="edit_appointment_action">Editar cita</string>
+    <string name="owner_label">Propietario:</string>
+    <string name="phone_label">Teléfono:</string>
+    <string name="pet_image">Imagen de la mascota</string>
+    <string name="appointment_deleted">Cita eliminada</string>
+    <string-array name="list_symptoms">
+        <item>Síntomas</item>
+        <item>Solo duerme</item>
+        <item>No come</item>
+        <item>Fractura extremidad</item>
+        <item>Tiene pulgas</item>
+        <item>Tiene garrapatas</item>
+        <item>Bota demasiado pelo</item>
+    </string-array>
 </resources>

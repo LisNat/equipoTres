@@ -63,7 +63,8 @@
         <action
             android:id="@+id/action_editAppointmentFragment_to_homeAppointmentFragment"
             app:destination="@id/homeAppointmentFragment"
-            app:popUpTo="@id/homeAppointmentFragment" />
+            app:popUpTo="@id/homeAppointmentFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

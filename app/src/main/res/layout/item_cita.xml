@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO: El diseño visual completo del ítem (HU-02 c3) lo implementa el compañero correspondiente.
+     Este layout tiene los ids acordados para que compile el Adapter y ViewHolder. -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvCita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <!-- Imagen circular de la mascota -->
+            <ImageView
+                android:id="@+id/ivMascota"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="@string/pet_image"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_image_circle"
+                android:clipToOutline="true"
+                android:src="@drawable/ic_dog_placeholder"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- Nombre de la mascota -->
+            <TextView
+                android:id="@+id/tvNombreMascota"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ivMascota"
+                app:layout_constraintEnd_toStartOf="@id/tvTurno"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Síntoma -->
+            <TextView
+                android:id="@+id/tvSintoma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/dark_gray"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@id/ivMascota"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNombreMascota" />
+
+            <!-- Turno (ID) -->
+            <TextView
+                android:id="@+id/tvTurno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pink"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
