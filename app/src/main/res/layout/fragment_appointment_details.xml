@@ -13,7 +13,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="105dp"
             android:background="@drawable/bg_toolbar_curvo"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,27 +27,142 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                tools:text="Firulais" />
+                tools:text="Cory" />
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!-- Guideline horizontal para superponer la tarjeta de imagen sobre la de info (HU-04 c2) -->
+        <!-- Guideline horizontal para que cvInfo arranque a la mitad de la imagen (HU-04 c2) -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineMitad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="300dp" />
+            app:layout_constraintGuide_begin="210dp" />
 
-        <!-- CardView con la imagen de la mascota (HU-04 c2) -->
+        <!-- CardView con la información de la cita, por debajo de la imagen (HU-04 c3) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:translationZ="2dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toTopOf="@id/guidelineMitad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Turno en la parte superior derecha (HU-04 c3) -->
+                <TextView
+                    android:id="@+id/tvTurno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/pink"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="#1" />
+
+                <!-- Nombre de la raza en negro bold, ubicado debajo de cvImagen (HU-04 c3) -->
+                <TextView
+                    android:id="@+id/tvRaza"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="pitbull" />
+
+                <!-- Descripción del síntoma (HU-04 c3) -->
+                <TextView
+                    android:id="@+id/tvSintoma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvRaza"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Tiene garrapatas" />
+
+                <!-- Línea delgada rosada (HU-04 c3) -->
+                <View
+                    android:id="@+id/lineaDivisora"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/pink"
+                    app:layout_constraintTop_toBottomOf="@id/tvSintoma"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Propietario (HU-04 c3) -->
+                <TextView
+                    android:id="@+id/tvPropietario"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@id/lineaDivisora"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Propietario: Walter" />
+
+                <!-- Teléfono (HU-04 c3) -->
+                <TextView
+                    android:id="@+id/tvTelefono"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="24dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@id/tvPropietario"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Teléfono: 3045675518" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- CardView con la imagen de la mascota, por encima de cvInfo (HU-04 c2) -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cvImagen"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_marginTop="24dp"
-            android:translationZ="4dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="20dp"
+            android:translationZ="8dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="8dp"
             app:cardBackgroundColor="@color/white"
@@ -66,117 +181,13 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- CardView con la información de la cita (HU-04 c3) -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvInfo"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="80dp"
-            android:translationZ="2dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/white"
-            app:layout_constraintTop_toTopOf="@id/guidelineMitad"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="20dp">
-
-                <!-- Turno en la parte superior derecha (HU-04 c3) -->
-                <TextView
-                    android:id="@+id/tvTurno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/pink"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="#1" />
-
-                <!-- Nombre de la raza en negro bold (HU-04 c3) -->
-                <TextView
-                    android:id="@+id/tvRaza"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="Labrador" />
-
-                <!-- Descripción del síntoma (HU-04 c3) -->
-                <TextView
-                    android:id="@+id/tvSintoma"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="14sp"
-                    app:layout_constraintTop_toBottomOf="@id/tvRaza"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="No come" />
-
-                <!-- Línea delgada rosada (HU-04 c3) -->
-                <View
-                    android:id="@+id/lineaDivisora"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/pink"
-                    app:layout_constraintTop_toBottomOf="@id/tvSintoma"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <!-- Propietario (HU-04 c3) -->
-                <TextView
-                    android:id="@+id/tvPropietario"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintTop_toBottomOf="@id/lineaDivisora"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="Propietario: Juan Pérez" />
-
-                <!-- Teléfono (HU-04 c3) -->
-                <TextView
-                    android:id="@+id/tvTelefono"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintTop_toBottomOf="@id/tvPropietario"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="Teléfono: 3045675518" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
         <!-- FAB Eliminar cita (HU-04 c4) -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fbDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:contentDescription="@string/delete_appointment"
             android:src="@drawable/ic_delete"
             app:backgroundTint="@color/pink"
@@ -190,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:contentDescription="@string/edit_appointment_action"
             android:src="@drawable/ic_edit"
             app:backgroundTint="@color/navy"

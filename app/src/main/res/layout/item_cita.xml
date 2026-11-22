@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- TODO: El diseño visual completo del ítem (HU-02 c3) lo implementa el compañero correspondiente.
-     Este layout tiene los ids acordados para que compile el Adapter y ViewHolder. -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

@@ -17,7 +17,7 @@ abstract class AppointmentDB : RoomDatabase() {
 
         fun getDatabase(context: Context): AppointmentDB {
             return INSTANCE ?: synchronized(this) {
-                Room.databaseBuilder(
+                INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     AppointmentDB::class.java,
                     NAME_BD
