@@ -47,17 +47,6 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    fun deleteAppointment(appointment: Appointment) {
-        viewModelScope.launch {
-            _progresState.value = true
-            try {
-                appointmentRepository.deleteAppointment(appointment)
-            } finally {
-                _progresState.value = false
-            }
-        }
-    }
-
     // Eliminar cita con callback para navegar después de completar el borrado
     fun deleteAppointment(appointment: Appointment, onDeleted: () -> Unit) {
         viewModelScope.launch {
